@@ -2,19 +2,23 @@ package com.adrian.demojpa.infrastructure.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.adrian.demojpa.application.service.PersonService;
-import com.adrian.demojpa.application.service.ProjectService;
 import com.adrian.demojpa.domain.Person;
 import com.adrian.demojpa.domain.Project;
 import com.adrian.demojpa.domain.Rol;
-
+import com.adrian.demojpa.domain.RoleRequest;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -49,8 +53,9 @@ public class ApiController {
     }
 
     @PostMapping("/roles")
-    public String newRole(){
-        return "Hola desde roles con l metodo POST";
+    @ResponseStatus(HttpStatus.CREATED)
+    public Rol newRole(@Valid @RequestBody RoleRequest role){
+        return personService.createNewRol(role.getName());
     }
 
     @GetMapping("/projects")    

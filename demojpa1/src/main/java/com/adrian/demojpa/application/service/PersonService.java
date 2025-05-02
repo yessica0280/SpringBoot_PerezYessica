@@ -11,4 +11,5 @@ public interface PersonService {
     public List<Person> findAllUsersByFilter(String filter, String value);
     public List<Rol> findAllRolesByFilter(String filter, String value);
     public List<Project> findAllByProjectsFilter(String filter, String value);
+    public Rol createNewRol(String name);
 }
